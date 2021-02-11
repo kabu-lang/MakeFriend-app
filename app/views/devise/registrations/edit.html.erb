@@ -4,12 +4,24 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+     <%= f.label :name %><br />
+     <%= f.text_field :name, autofocus: true %>
+   </div>
+
+
+  <div class="birth_date_field">
+    <%= f.label :birthday %>
+    <%= f.date_select(
+          :birthdat,
+          start_year: 1956,
+          end_year: (Time.now.year - 18),
+          default: Date.new(1956, 1, 1)) %>
   </div>
 
+
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div> 現在<%= resource.unconfirmed_email %>こちらのメールアドレスの認証待ちです</div>
   <% end %>
 
   <div class="field">
