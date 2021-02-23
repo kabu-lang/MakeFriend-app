@@ -1,0 +1,19 @@
+<ul class="users">
+  <% @communities.each do |community| %>
+    <%= link_to community_path(community.id) do %>
+      <%= community.name %>
+      <%= community.prefecture_id %>
+      <%= community.municipality %>
+      <%= community.area_detail %>
+      <%= community.date.strftime("%Y-%m-%d %H:%M") %>
+      <br>
+      <%= community.max_people %>
+      <%= community.participation_people %>
+      <% if community.max_people - community.participation_people == 0 %>
+        <p>募集締切</p>
+      <% else %>
+        <p>参加可能</p>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
