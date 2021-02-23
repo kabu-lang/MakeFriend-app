@@ -5,7 +5,11 @@ mount_uploader :image_name, ImageNameUploader
          :confirmable, :lockable, :timeoutable, :trackable
   has_many :category_users, dependent: :destroy
   has_many :categories, through: :category_users
+  has_many :user_communities, dependent: :destroy
+  has_many :communities, through: :user_communities
   accepts_nested_attributes_for :category_users, allow_destroy: true
+  accepts_nested_attributes_for :user_communities, allow_destroy: true
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
 
