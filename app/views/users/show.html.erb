@@ -1,0 +1,18 @@
+<% provide(:title, @user.name) %>
+<h1>My page (<%= @user.name %>)</h1>
+<h1>Users#show</h1>
+
+
+<p>名前 : <%= @user.name %></p>
+<p>性別 : <%= @user.gender == 0 ? "男性" : "女性" %></p>
+<p>生年月日 : <%= @user.birthday %></p>
+趣味 : <% @user.categories.each do |category| %>
+<%= category.category_name %>
+<% end %>
+<p>地域 : <%= @user.area %></p>
+<p>一言 : <%= @user.remarks %></p>
+
+<img src=<%= @user.image_name %> class = "icon_image">
+
+
+<%= link_to '編集',edit_user_registration_path %>
