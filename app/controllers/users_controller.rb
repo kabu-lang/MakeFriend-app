@@ -3,7 +3,13 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.all
+    if params[:send_category] == nil && params[:send_area] == nil
+      @users = User.all
+    elsif !params[:send_category].nil?
+      @users = User.includes(:categories).where(categories:{id:params[:category_id][:id]} )
+    else
+      @users = User.where(area:params[:user][:area])
+    end
   end
 
   def show

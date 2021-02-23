@@ -7,7 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super
-  end
+ end
 
   # POST /resource
   def create
@@ -21,6 +21,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
   def update
+    current_user.category_users.destroy_all
+    if params[:user][:category_ids] != nil
+      params[:user][:category_ids].each do |category_id|
+        CategoryUser.create(user_id:current_user.id,category_id:category_id)
+      end
+    end
     super
   end
 
@@ -48,7 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :birthday, :area, :gender, :remarks, :image_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :birthday, :area, :gender, :remarks, :image_name_cache, :category_ids])
   end
 
   # The path used after sign up.
@@ -61,5 +67,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
+  def update_resource(resource, params)
+    resource.update_without_current_password(params)
+  end
+
+
+  def after_update_path_for(resource)
+    user_path(resource.id)
+  end
 
 end

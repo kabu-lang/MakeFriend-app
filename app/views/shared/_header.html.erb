@@ -1,0 +1,16 @@
+<header>
+  <nav>
+    <% if user_signed_in? %>
+      <%= link_to 'プロフィール', user_path(current_user) %>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+      <%# <%= link_to 'コミュニティ'　%> 
+      <% request.path %>
+      <% if request.path != "/" && request.path !="/users" %>
+       <%= link_to 'ユーザ一覧', users_path %>
+      <% end %>
+    <% else %>
+      <%= link_to 'サインアップ', new_user_registration_path %>
+      <%= link_to 'ログイン', new_user_session_path %>
+    <% end %>
+  </nav>
+</header>

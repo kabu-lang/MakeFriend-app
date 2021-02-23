@@ -5,12 +5,12 @@
    <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-     <%= f.label :name %><br />
+     <%= f.label :name, "名前" %><br />
      <%= f.text_field :name, autofocus: true %>
    </div>
 <br />
   <div class="birth_date_field">
-    <%= f.label :birthday %>
+    <%= f.label :birthday, "誕生日" %>
     <%= f.date_select(
           :birthday,
           start_year: 1956,
@@ -23,7 +23,6 @@
 <div>
   性別：
   <label><%= f.radio_button :gender, 0 %>男性</label><label><%= f.radio_button :gender, 1 %>女性</label>
-
 </div>
 <br />
 
@@ -34,13 +33,17 @@
   <%= f.select :area, User.areas_i18n.keys.map { |k| [User.areas_i18n[k], k]} %>
 </div>
 <br />
+<div>
+<%= f.label :category_ids, "趣味"  %>
+<%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name, include_hidden: false %>
 
-
+</div>
 
 <div>
   一言<br />
   <%= f.text_area :remarks %>
 </div>
+
 
 
 <div class="field">
@@ -50,31 +53,8 @@
   </div>
 
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div> 現在<%= resource.unconfirmed_email %>こちらのメールアドレスの認証待ちです</div>
-  <% end %>
+  
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-
-
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
 
   <div class="actions">
     <%= f.submit "Update" %>
