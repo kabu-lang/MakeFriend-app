@@ -5,7 +5,7 @@
   <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
   <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
   <%= select :user, :area, User.areas_i18n.keys.map { |k| [User.areas_i18n[k], k]} %>
-  <%= submit_tag 'エリア別に探す', name: :send_area  %>
+  <%= submit_tag 'エリア別', name: :send_area  %>
 <% end %>
 
 

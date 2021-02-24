@@ -1,4 +1,14 @@
-<ul class="users">
+<ul class="">
+
+  <%= link_to 'コミュニティを作成する', new_community_path %>
+
+  <%= form_tag(communities_path,:method => 'get') do %>
+    <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
+    <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
+    <%= collection_select :prefecture_id, :id, Prefecture.all, :id, :name, prompt:"---" %>
+    <%= submit_tag 'エリア別に探す', name: :send_area  %>
+  <% end %>
+
   <% @communities.each do |community| %>
     <%= link_to community_path(community.id) do %>
       <%= community.name %>

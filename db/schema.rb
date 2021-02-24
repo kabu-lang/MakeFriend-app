@@ -38,8 +38,10 @@ ActiveRecord::Schema.define(version: 2021_02_23_012231) do
     t.integer "max_people", default: 0, null: false
     t.integer "participation_people", default: 0, null: false
     t.datetime "date", null: false
+    t.bigint "ctaegory_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["ctaegory_id"], name: "index_communities_on_ctaegory_id"
   end
 
   create_table "user_communities", force: :cascade do |t|
@@ -70,14 +72,14 @@ ActiveRecord::Schema.define(version: 2021_02_23_012231) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.date "birthday"
+    t.integer "area"
     t.integer "gender"
     t.text "remarks"
     t.string "image_name"
-    t.integer "area"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
