@@ -1,0 +1,24 @@
+<%= form_with model: @community do |form| %>
+  <%= form.label :name, "題名" %>
+  <%= form.text_field :name, autofocus: true %><br>
+<br>
+  <%= form.label :prefecture_id, "都道府県" %>
+  <%= form.collection_select(:prefecture_id, Prefecture.all, :id, :name ) %><br>
+<br>
+  <%= form.label :municipality, "市区町村" %>
+  <%= form.text_field :municipality %><br>
+<br>
+  <%= form.label :area_detail, "エリア詳細(駅名や建物名など)" %><br>
+  <%= form.text_field :area_detail %><br>
+<br>
+  <%= form.label :date, "日時" %>
+  <%= form.datetime_select :date, use_month_numbers:true, :start_year => Time.now.year, :end_year => Time.now.year + 1, :minute_step => 15 %><br>
+<br>
+  <%= form.label :category, "カテゴリ" %>
+  <%= form.collection_select(:category_id, Category.all, :id, :category_name, include_blank:true ) %><br>
+<br>
+  <%= form.label :max_people, "募集人数" %><p>(人数は2人以上、50人以下で選んでください)</p>
+  <%= form.number_field :max_people, min:2, max:50 %><br>
+  <br>
+  <%= form.submit %>
+<% end %>
