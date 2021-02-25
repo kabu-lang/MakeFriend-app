@@ -1,14 +1,17 @@
 <header>
   <nav>
     <% if user_signed_in? %>
-      <%= link_to 'プロフィール', user_path(current_user) %>
+
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
       <% request.path %>
       <% if request.path != "/" && request.path != "/users" %>
        <%= link_to 'ユーザ一覧', users_path %>
-       <% elsif request.path != "/communities" %>
+      <% end %>
+      <% if request.path != "/communities" %>
        <%= link_to 'コミュニティ', communities_path %>
-       <% else %>
+      <% end %>
+      <% if request.path != "/users/#{current_user.id}" %>
+       <%= link_to 'プロフィール', user_path(current_user) %>
       <% end %>
     <% else %>
       <%= link_to 'サインアップ', new_user_registration_path %>

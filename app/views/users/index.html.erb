@@ -4,8 +4,8 @@
 <%= form_tag(users_path,:method => 'get') do %>
   <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
   <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
-  <%= select :user, :area, User.areas_i18n.keys.map { |k| [User.areas_i18n[k], k]} %>
-  <%= submit_tag 'エリア別', name: :send_area  %>
+  <%= collection_select :prefecture_id, :id, Prefecture.all, :id, :name, prompt:"---" %>
+  <%= submit_tag 'エリア別', name: :send_prefecture  %>
 <% end %>
 
 

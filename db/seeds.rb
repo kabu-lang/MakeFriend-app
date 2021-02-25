@@ -5,7 +5,7 @@
      name: "山田 太郎#{n + 1}",
      birthday: "1956-10-25",
      gender: "1",
-     area: 27,
+     prefecture_id: 27,
      remarks: "こんにちは"
    )
  end

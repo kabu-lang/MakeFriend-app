@@ -38,10 +38,10 @@ ActiveRecord::Schema.define(version: 2021_02_23_012231) do
     t.integer "max_people", default: 0, null: false
     t.integer "participation_people", default: 0, null: false
     t.datetime "date", null: false
-    t.bigint "ctaegory_id", null: false
+    t.bigint "category_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["ctaegory_id"], name: "index_communities_on_ctaegory_id"
+    t.index ["category_id"], name: "index_communities_on_category_id"
   end
 
   create_table "user_communities", force: :cascade do |t|
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2021_02_23_012231) do
     t.datetime "locked_at"
     t.string "name"
     t.date "birthday"
-    t.integer "area"
+    t.integer "prefecture_id"
     t.integer "gender"
     t.text "remarks"
     t.string "image_name"

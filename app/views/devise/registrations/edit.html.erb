@@ -30,13 +30,12 @@
 
 <div>
   お住まいの都道府県を選んでください<br />
-  <%= f.select :area, User.areas_i18n.keys.map { |k| [User.areas_i18n[k], k]} %>
+  <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name ) %><br>
 </div>
 <br />
 <div>
-<%= f.label :category_ids, "趣味"  %>
-<%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name, include_hidden: false %>
-
+  <%= f.label :category_ids, "趣味"  %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :category_name, include_hidden: false %>
 </div>
 
 <div>
@@ -53,7 +52,7 @@
   </div>
 
 
-  
+
 
 
   <div class="actions">

@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.0]
 
       t.string   :name
       t.date     :birthday
-      t.integer  :area
+      t.integer  :prefecture_id
       t.integer  :gender
       t.text     :remarks
       t.string   :image_name
