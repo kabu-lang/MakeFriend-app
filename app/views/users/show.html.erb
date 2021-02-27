@@ -7,12 +7,21 @@
 <p>性別 : <%= @user.gender == 0 ? "男性" : "女性" %></p>
 <p>生年月日 : <%= @user.birthday %></p>
 趣味 : <% @user.categories.each do |category| %>
-<%= category.category_name %>
-<% end %>
+       <%= category.category_name %>
+      <% end %>
 <p>地域 : <%= @user.prefecture_id %></p>
 <p>一言 : <%= @user.remarks %></p>
 
 <img src=<%= @user.image_name %> class = "icon_image">
 
+<% if current_user == @user %>
+ <%= link_to '編集', edit_user_registration_path %>
+<% end %>
 
-<%= link_to '編集',edit_user_registration_path %>
+<p>いいねしたユーザー一覧</p>
+
+<p>いいねされているユーザー一覧</p>
+<p>メッセージ送受信箱</p>
+
+<p>参加中のコミュニティ</p>
+<p>作成したコミュニティ</p>

@@ -6,24 +6,24 @@
     <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
     <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
     <%= collection_select :prefecture_id, :id, Prefecture.all, :id, :name, prompt:"---" %>
-    <%= submit_tag 'エリア別に探す', name: :send_area  %>
+    <%= submit_tag 'エリア別に探す', name: :send_prefecture %>
   <% end %>
 
   <% @communities.each do |community| %>
     <%= link_to community_path(community.id) do %>
-      <%= community.name %>
-      <%= community.prefecture_id %>
-      <%= community.municipality %>
-      <%= community.area_detail %>
-      <%= community.date.strftime("%Y-%m-%d %H:%M") %>
-      <br>
-      <%= community.max_people %>
-      <%= community.participation_people %>
+    <strong>「<%= community.name %>」</strong>
+    <p>日時 : <%= community.date.strftime("%Y-%m-%d %H:%M") %></p>
+    <p>都道府県 : <%= community.prefecture_id %></p>
+    <p>市区町村 : <%= community.municipality %>
+    <p>場所詳細 : <%= community.area_detail %>
+    <p>募集人数 : <%= community.max_people %>人</p>
+    <p>現在の参加人数 : <%= community.participation_people %>人</p>
+    <% end %>
       <% if community.max_people - community.participation_people == 0 %>
         <p>募集締切</p>
       <% else %>
         <p>参加可能</p>
       <% end %>
-    <% end %>
+
   <% end %>
 </ul>
