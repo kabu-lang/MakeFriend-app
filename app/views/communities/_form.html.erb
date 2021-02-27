@@ -3,7 +3,7 @@
   <%= form.text_field :name, autofocus: true %><br>
 <br>
   <%= form.label :prefecture_id, "都道府県" %>
-  <%= form.collection_select(:prefecture_id, Prefecture.all, :id, :name ) %><br>
+  <%= form.collection_select(:prefecture_id, Prefecture.all, :id, :name, include_blank:true ) %><br>
 <br>
   <%= form.label :municipality, "市区町村" %>
   <%= form.text_field :municipality %><br>
@@ -20,5 +20,6 @@
   <%= form.label :max_people, "募集人数" %><p>(人数は2人以上、50人以下で選んでください)</p>
   <%= form.number_field :max_people, min:2, max:50 %><br>
   <br>
+  <%= form.hidden_field :author, value: current_user.id %>
   <%= form.submit %>
 <% end %>
