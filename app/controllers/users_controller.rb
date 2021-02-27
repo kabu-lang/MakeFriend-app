@@ -4,13 +4,11 @@ class UsersController < ApplicationController
 
   def index
     if params[:send_category] == nil && params[:send_prefecture] == nil
-      @users = User.all
+      @users = User.except_current_user(current_user.id)
     elsif !params[:send_category].nil?
-      @users = User.includes(:categories).where(categories:{id:params[:category_id][:id]})
+      @users = User.includes(:categories).where(categories:{id:params[:category_id][:id]}).except_current_user(current_user.id)
     else
-      
-      @users = User.where(prefecture_id:params[:prefecture_id][:id])
-
+      @users = User.where(prefecture_id:params[:prefecture_id][:id]).except_current_user(current_user.id)
     end
   end
 

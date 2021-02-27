@@ -1,5 +1,7 @@
 class User < ApplicationRecord
-mount_uploader :image_name, ImageNameUploader
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :prefecture
+  mount_uploader :image_name, ImageNameUploader
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
@@ -7,9 +9,10 @@ mount_uploader :image_name, ImageNameUploader
   has_many :categories, through: :category_users
   has_many :user_communities, dependent: :destroy
   has_many :communities, through: :user_communities
+  has_many :created_communities, class_name: "Community", foreign_key: :author
   accepts_nested_attributes_for :category_users, allow_destroy: true
   accepts_nested_attributes_for :user_communities, allow_destroy: true
-
+  has_one_attached :image
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
 
@@ -22,6 +25,7 @@ mount_uploader :image_name, ImageNameUploader
   validates :remarks, presence: true, on: :update
   validate :category_exit, on: :update
 
+  scope :except_current_user, -> (current_user_id) {where.not(id:current_user_id)}
 
 
    def update_without_current_password(params, *options)
