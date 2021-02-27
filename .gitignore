@@ -80,3 +80,6 @@ yarn-debug.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+/public/uploads/tmp/*
+/public/uploads/user/*
