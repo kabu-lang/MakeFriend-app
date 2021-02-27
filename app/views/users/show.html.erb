@@ -9,10 +9,12 @@
 趣味 : <% @user.categories.each do |category| %>
        <%= category.category_name %>
       <% end %>
-<p>地域 : <%= @user.prefecture_id %></p>
+<p>地域 : <%= @user.prefecture.name %></p>
 <p>一言 : <%= @user.remarks %></p>
 
-<img src=<%= @user.image_name %> class = "icon_image">
+<% if @user.image.attached? %>
+  <%= image_tag @user.image %>
+<% end %>
 
 <% if current_user == @user %>
  <%= link_to '編集', edit_user_registration_path %>
@@ -24,4 +26,10 @@
 <p>メッセージ送受信箱</p>
 
 <p>参加中のコミュニティ</p>
+
 <p>作成したコミュニティ</p>
+
+
+<% @user.created_communities.each do |created_community| %>
+  <%= created_community.name %>
+<% end %>

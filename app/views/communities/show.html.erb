@@ -1,6 +1,6 @@
 <strong>「<%= @community.name %>」</strong>
 <p>日時 : <%= @community.date.strftime("%Y-%m-%d %H:%M") %></p>
-<p>都道府県 : <%= @community.prefecture_id %></p>
+<p>都道府県 : <%= @community.prefecture.name %></p>
 <p>市区町村 : <%= @community.municipality %>
 <p>場所詳細 : <%= @community.area_detail %>
 <p>募集人数 : <%= @community.max_people %>人</p>
