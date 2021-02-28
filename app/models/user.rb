@@ -10,9 +10,14 @@ class User < ApplicationRecord
   has_many :user_communities, dependent: :destroy
   has_many :communities, through: :user_communities
   has_many :created_communities, class_name: "Community", foreign_key: :author
+
+  has_many :like_receivers, class_name: "Like", foreign_key: :receiver_id
+  has_many :receivers, through: :like_receivers, source: :sender
+
   accepts_nested_attributes_for :category_users, allow_destroy: true
   accepts_nested_attributes_for :user_communities, allow_destroy: true
   has_one_attached :image
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
 
@@ -23,7 +28,7 @@ class User < ApplicationRecord
   validates :prefecture_id, presence: true, on: :update
   validates :gender, presence: true, on: :update
   validates :remarks, presence: true, on: :update
-  validate :category_exit, on: :update
+  validate  :category_exit, on: :update
 
   scope :except_current_user, -> (current_user_id) {where.not(id:current_user_id)}
 
