@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-
+    @user_communities = @user.communities
   end
 
 end
