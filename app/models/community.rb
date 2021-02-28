@@ -4,6 +4,7 @@ class Community < ApplicationRecord
   has_many :user_communities, dependent: :destroy
   has_many :users, through: :user_communities
   belongs_to :category
+  has_many  :community_messages
   validates :name , presence: true, length: { maximum: 45 }
   validates :prefecture_id, presence: true
   validates :municipality, presence: true,length: { maximum: 15 }
