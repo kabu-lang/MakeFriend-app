@@ -16,4 +16,17 @@ class UserCommunitiesController < ApplicationController
    end
  end
 
+  def destroy
+        user_community = UserCommunity.find_by(user_id: current_user.id, community_id: params[:community_id])
+    if user_community.destroy
+      community= Community.find(params[:community_id])
+       community.update(
+        participation_people: community.participation_people - 1
+      )
+      redirect_to community_path(community.id), notice: '参加を取り消しました'
+    else
+      redirect_to community_path(community.id), alert: '取り消しができませんでした'
+    end
+  end 
+
 end

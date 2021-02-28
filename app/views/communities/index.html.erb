@@ -19,11 +19,13 @@
     <p>募集人数 : <%= community.max_people %>人</p>
     <p>現在の参加人数 : <%= community.participation_people %>人</p>
     <% end %>
-      <% if community.max_people - community.participation_people == 0 %>
+    <% if UserCommunity.find_by(user_id: current_user.id, community_id: community.id).present? %>
+      <p>参加中</p>
+    <% elsif community.max_people - community.participation_people == 0 %>
         <p>募集締切</p>
-      <% else %>
+    <% else %>
         <p>参加可能</p>
-      <% end %>
+    <% end %>
 
   <% end %>
 </ul>

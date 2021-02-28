@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, :only => [:index, :show]
   resources :communities, :except => [:destroy] do
-    resource :user_communities, :only => [:create]
+    resource :user_communities, :only => [:create, :destroy]
 
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

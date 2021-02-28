@@ -5,8 +5,11 @@
 <p>場所詳細 : <%= @community.area_detail %>
 <p>募集人数 : <%= @community.max_people %>人</p>
 <p>参加人数 : <%= @community.participation_people %>人</p>
-
-<% if @community.max_people - @community.participation_people == 0 %>
+<% if UserCommunity.find_by(user_id: current_user.id, community_id: @community.id).present?%>
+  <%= form_with url:community_user_communities_path(community_id: @community.id), local: true, method: :delete do |f| %>
+    <%= f.submit "参加を取り消す" %>
+  <% end %>
+<% elsif @community.max_people - @community.participation_people == 0 %>
   <p>募集締切</p>
 <% else %>
   <%= form_with url:community_user_communities_path(community_id: @community.id), local: true, method: :post do |f| %>
