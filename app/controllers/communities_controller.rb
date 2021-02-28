@@ -18,7 +18,6 @@ class CommunitiesController < ApplicationController
 
   def create
     @community = Community.new(community_params)
-
     @community.participation_people = 1
     @community.date = DateTime.new(
       params[:community]["date(1i)"].to_i,
@@ -66,7 +65,7 @@ class CommunitiesController < ApplicationController
   end
 
   def community_params
-    params.require(:community).permit(:name, :prefecture_id, :municipality, :area_detail, :max_people, :category_id, :author)
+    params.require(:community).permit(:name, :prefecture_id, :municipality, :area_detail, :max_people, :category_id, :author).merge(status: Community.statuses[:looking_for_member])
   end
 
 

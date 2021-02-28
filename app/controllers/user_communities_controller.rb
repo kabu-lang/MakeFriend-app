@@ -9,6 +9,7 @@ class UserCommunitiesController < ApplicationController
      # コミュニティの参加人数を更新
       add_people = @community.participation_people + 1
       @community.update(participation_people:add_people)
+      @community.update(status: Community.statuses[:max_number_of_people]) if add_people = @community.max_people
       redirect_to community_path(@community.id), notice: '参加しました'
      # 失敗したらエラーメッセージを返す
      else
@@ -23,10 +24,11 @@ class UserCommunitiesController < ApplicationController
        community.update(
         participation_people: community.participation_people - 1
       )
+      community.update(status: Community.statuses[:looking_for_member]) if community.status == "max_number_of_people"
       redirect_to community_path(community.id), notice: '参加を取り消しました'
     else
       redirect_to community_path(community.id), alert: '取り消しができませんでした'
     end
-  end 
+  end
 
 end

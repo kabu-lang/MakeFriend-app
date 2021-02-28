@@ -11,4 +11,9 @@ class Community < ApplicationRecord
   validates :max_people, presence: true, inclusion: { in: 2..50 }
   validates :participation_people, presence: true
   validates :category_id, presence: true
+
+ enum status: [:looking_for_member, :max_number_of_people]
+
+
+# :deadline_has_passed,
 end
