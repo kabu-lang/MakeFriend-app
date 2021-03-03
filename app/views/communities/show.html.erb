@@ -21,3 +21,17 @@
     <% end %>
   <% end %>
 <% end %>
+
+<% if @community.users.find_by(id:current_user.id) %>
+  <div>
+    <div id='messages'>
+      <%= render partial: "message", collection: @community.community_messages %>
+    </div>
+    <!-- <form> -->
+      <input type="text" class= 'community_message_content' >
+      <input type="hidden" class= 'current_user_id_on_community_message' value=<%= current_user.id %>>
+      <input type="hidden" class= 'community_id' value=<%= @community.id %>>
+      <button class="community_message_send_button">送信</button>
+    <!-- </form> -->
+  </div>
+<% end %>
