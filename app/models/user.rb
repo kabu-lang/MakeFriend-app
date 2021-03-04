@@ -10,9 +10,16 @@ class User < ApplicationRecord
   has_many :user_communities, dependent: :destroy
   has_many :communities, through: :user_communities
   has_many :created_communities, class_name: "Community", foreign_key: :author
+  # has_many :likes
+  # has_many :receivers, through: :likes, source: :sender
+  # has_many :senders, class_name: "Like", foreign_key: :receiver_id
+  # has_many :like_receivers, class_name: "Like", foreign_key: :receiver_id
+  # has_many :receivers, through: :likes, source:　
 
-  has_many :like_receivers, class_name: "Like", foreign_key: :receiver_id
-  has_many :receivers, through: :like_receivers, source: :sender
+  # 自分が送ったいいねと、送った側(自分)のIDを紐付けている
+  has_many :sended_likes, class_name: "Like", foreign_key: "sender_id", dependent: :destroy
+  # 時文が受け取ったいいねと、受け取った側(相手)のIDを紐付けている
+  has_many :received_likes, class_name: "Like", foreign_key: "receiver_id", dependent: :destroy
 
   accepts_nested_attributes_for :category_users, allow_destroy: true
   accepts_nested_attributes_for :user_communities, allow_destroy: true
