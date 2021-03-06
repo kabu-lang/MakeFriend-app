@@ -7,23 +7,15 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable
   has_many :category_users, dependent: :destroy
   has_many :categories, through: :category_users
-  
+
   has_many :user_communities, dependent: :destroy
   has_many :communities, through: :user_communities
   has_many :created_communities, class_name: "Community", foreign_key: :author
-  # has_many :likes
-  # has_many :receivers, through: :likes, source: :sender
-  # has_many :senders, class_name: "Like", foreign_key: :receiver_id
-  # has_many :like_receivers, class_name: "Like", foreign_key: :receiver_id
-  # has_many :receivers, through: :likes, source:　
-
   # 自分が送ったいいね取得
   has_many :sended_likes, class_name: "Like", foreign_key: "sender_id", dependent: :destroy
-   # 自分が送ったいいねを通して、その中からreceiveｒ_idを元に自分がいいねを送った人を取得
+  # 自分が送ったいいねを通して、その中からreceiveｒ_idを元に自分がいいねを送った人を取得
   has_many :like_receivers, through: :sended_likes, source: :receiver
-
-
-   # 自分が受けたいいね取得
+  # 自分が受けたいいね取得
   has_many :received_likes, class_name: "Like", foreign_key: "receiver_id", dependent: :destroy
   # 自分に送られてきたいいねを通して、その中からsender_idを元に自分にいいねを送った人を取得
   has_many :like_senders, through: :received_likes, source: :sender
