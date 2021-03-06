@@ -4,12 +4,19 @@
 
 
 <p>名前 : <%= @user.name %></p>
-<p>性別 : <%= @user.gender == 0 ? "男性" : "女性" %></p>
+<p>性別 : <% if @user.gender == 0 %>
+          男性
+         <% elsif @user.gender == 1 %>
+          女性
+         <% end %>
+</p>
+
+
 <p>生年月日 : <%= @user.birthday %></p>
 趣味 : <% @user.categories.each do |category| %>
        <%= category.category_name %>
       <% end %>
-<p>地域 : <%= @user.prefecture.name %></p>
+<p>地域 : <%= @user.prefecture.present? ? @user.prefecture.name : "" %></p>
 <p>一言 : <%= @user.remarks %></p>
 
 <% if @user.image.attached? %>
@@ -26,8 +33,9 @@
 <p>メッセージ送受信箱</p>
 
 <p>参加中のコミュニティ</p>
-<% @user_communities.each do |community| %>
 
+<% @user_communities.each do |community| %>
+ <% next if community.author == current_user.id %>
   <%= link_to community_path(community.id) do %>
     <strong>「<%= community.name %>」</strong>
     <p>日時 : <%= community.date.strftime("%Y-%m-%d %H:%M") %></p>

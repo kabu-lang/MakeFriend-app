@@ -1,19 +1,41 @@
-<strong>「<%= @community.name %>」</strong>
-<p>日時 : <%= @community.date.strftime("%Y-%m-%d %H:%M") %></p>
-<p>都道府県 : <%= @community.prefecture.name %></p>
-<p>市区町村 : <%= @community.municipality %>
-<p>場所詳細 : <%= @community.area_detail %>
-<p>募集人数 : <%= @community.max_people %>人</p>
-<p>参加人数 : <%= @community.participation_people %>人</p>
+<h1>「<%= @community.name %>」</h1>
+<div class="community-wrapper">
+  <div class="community-main-content">
+    <p>日時 : <%= @community.date.strftime("%Y-%m-%d %H:%M") %></p>
+    <p>都道府県 : <%= @community.prefecture.name %></p>
+    <p>市区町村 : <%= @community.municipality %>
+    <p>場所詳細 : <%= @community.area_detail %>
+    <p>募集人数 : <%= @community.max_people %>人</p>
+    <p>参加人数 : <%= @community.participation_people %>人</p>
 
-<% if @community.max_people - @community.participation_people == 0 %>
-  <p>募集締切</p>
-<% else %>
-  <%= form_with url:community_user_communities_path(community_id: @community.id), local: true, method: :post do |f| %>
-    <%= f.submit "参加する" %>
-  <% end %>
-<% end %>
+    <% if current_user.id == @community.author %>
+      <%= link_to '編集', edit_community_path %>
+    <% else %>
+      <% if UserCommunity.find_by(user_id: current_user.id, community_id: @community.id).present?%>
+        <%= form_with url:community_user_communities_path(community_id: @community.id), local: true, method: :delete do |f| %>
+          <%= f.submit "参加を取り消す" %>
+        <% end %>
+      <% elsif @community.status == "max_number_of_people" %>
+        <p>募集締切</p>
+      <% else %>
+        <%= form_with url:community_user_communities_path(community_id: @community.id), local: true, method: :post do |f| %>
+          <%= f.submit "参加する" %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 
-<% if current_user.id == @community.author %>
-<%= link_to '編集', edit_community_path %>
-<% end %>
+  <div class="community-chat-content">
+    <% if @community.users.find_by(id:current_user.id) %>
+      <div id='community-chat-messages'>
+        <%= render partial: "message", collection: @community.community_messages %>
+      </div>
+      <form>
+        <input type="text" class= 'community-message-content' >
+        <input type="hidden" class= 'current-user-id-on-community-message' value=<%= current_user.id %>>
+        <input type="hidden" class= 'community-id' value=<%= @community.id %>>
+        <button class="community-message-send-button">送信</button>
+      </form>
+    <% end %>
+  </div>
+</div>

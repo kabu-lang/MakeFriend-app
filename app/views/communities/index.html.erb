@@ -10,6 +10,7 @@
   <% end %>
 
   <% @communities.each do |community| %>
+    <% next if community.author == current_user.id %>
     <%= link_to community_path(community.id) do %>
     <strong>「<%= community.name %>」</strong>
     <p>日時 : <%= community.date.strftime("%Y-%m-%d %H:%M") %></p>
@@ -19,11 +20,13 @@
     <p>募集人数 : <%= community.max_people %>人</p>
     <p>現在の参加人数 : <%= community.participation_people %>人</p>
     <% end %>
-      <% if community.max_people - community.participation_people == 0 %>
+    <% if UserCommunity.find_by(user_id: current_user.id, community_id: community.id).present? %>
+      <p>参加中</p>
+    <% elsif community.status == "max_number_of_people" %>
         <p>募集締切</p>
-      <% else %>
+    <% else %>
         <p>参加可能</p>
-      <% end %>
+    <% end %>
 
   <% end %>
 </ul>
