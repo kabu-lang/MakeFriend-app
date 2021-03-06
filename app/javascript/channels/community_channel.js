@@ -5,7 +5,7 @@ const appCommunity = consumer.subscriptions.create("CommunityChannel", {
   // 省略
 
   received(data) {
-    const messages = document.getElementById('messages');
+    const messages = document.getElementById('community-chat-messages');
     messages.insertAdjacentHTML('beforeend', data['message']);
   },
 
@@ -14,15 +14,18 @@ const appCommunity = consumer.subscriptions.create("CommunityChannel", {
   }
 });
 
-  $(".community_message_send_button").on("click", function(e){
-    const user_id = $(".current_user_id_on_community_message").val()
-    const community_id = $(".community_id").val()
-    const message_content = $(".community_message_content").val()
+onload = function() {
+  $(".community-message-send-button").on("click", function(e){
+    const user_id = $(".current-user-id-on-community-message").val()
+    const community_id = $(".community-id").val()
+    const message_content = $(".community-message-content").val()
     appCommunity.speak({
       content: message_content,
       user_id: user_id,
       community_id: community_id
     });
-    $(".community_message_content").val("")
+    $(".community-message-content").val("")
     e.preventDefault();
   });
+
+}

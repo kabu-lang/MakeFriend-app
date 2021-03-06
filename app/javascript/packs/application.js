@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+//jqueryが動かない時のデバックで削除　不要なので引き続き削除
+// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("jquery")
