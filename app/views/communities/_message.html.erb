@@ -1,3 +1,9 @@
+<div class="community-chat-message">
+  <% if message.user.present? %>
+    <%= message.user.name %>
+  <% else %>
+    <%= user_name %>
+  <% end %>
 
- <%= message.content %>
- 
+  <%= message.content %>
+</div>

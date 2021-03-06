@@ -9,6 +9,7 @@ class CommunityMessageBroadcastJob < ApplicationJob
    private
 
    def render_message(message)
-     ApplicationController.renderer.render(partial: 'communities/message', locals: { message: message })
+     user_name = User.find_by(id:message.user_id).name
+     ApplicationController.renderer.render(partial: 'communities/message', locals: { message: message, user_name: user_name})
    end
 end
