@@ -1,19 +1,20 @@
-<% provide(:title, 'All users') %>
-<h1>All users</h1>
+<div class= "users-page">
+  <div>
+    <% provide(:title, 'All users') %>
+    <h1>All users</h1>
+  </div>
 
-<%= form_tag(users_path,:method => 'get') do %>
-  <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
-  <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
-  <%= collection_select :prefecture_id, :id, Prefecture.all, :id, :name, prompt:"---" %>
-  <%= submit_tag 'エリア別', name: :send_prefecture %>
-<% end %>
+  <div>
+    <%= form_tag(users_path,:method => 'get') do %>
+      <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
+      <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
+      <%= collection_select :prefecture_id, :id, Prefecture.all, :id, :name, prompt:"---" %>
+      <%= submit_tag 'エリア別', name: :send_prefecture %>
+    <% end %>
+  </div>
 
-
-
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to user.name, user %>
-    </li>
-  <% end %>
-</ul>
+  <div class="users-list-content">
+    <%= render @users %>
+    <input type="hidden" class="like-sender-id" value=<%= current_user.id %>>
+  </div>
+</div>
