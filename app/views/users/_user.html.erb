@@ -1,14 +1,14 @@
-<div id=<% "user-list-item-#{user.id}" %>>
+<div id=<%="user-list-item-#{user.id}" %>>
   <%= link_to user_path(user) do %>
-    <%= user.name %>
-    <%= user.gender %>
-    <%= user.birthday %>
-    <% user.categories.each do |category| %>
+    <p class="user-name">名前：<%= user.name %></p>
+    <p class="user-gender">性別：<%= user.gender %></p>
+    <p class="user-age">年齢：<%= user.birthday %></p>
+    <p class="user-cotegories">趣味：<% user.categories.each do |category| %>
       <%= category.category_name %>
     <% end %>
-    <%= user.prefecture.name %>
+    </p>
+    <p class="user-prefecture">居住エリア：<%= user.prefecture.name %></p>
   <% end %>
-
   <% if current_user.like_receivers.exists?(id:user.id) %>
     <button class="liked-button" value=<%= user.id %>>いいね済み</button>
   <% else %>

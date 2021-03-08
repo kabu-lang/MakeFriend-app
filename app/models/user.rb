@@ -39,6 +39,8 @@ class User < ApplicationRecord
   scope :except_current_user, -> (current_user_id) {where.not(id:current_user_id)}
 
 
+  # enum gender: { men: 0, women: 1 }
+
    def update_without_current_password(params, *options)
      params.delete(:current_password)
 
