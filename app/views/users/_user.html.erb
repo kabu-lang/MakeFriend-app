@@ -1,4 +1,4 @@
-<div id=<%="user-list-item-#{user.id}" %>>
+<div>
   <%= link_to user_path(user) do %>
     <p class="user-name">名前：<%= user.name %></p>
     <p class="user-gender">性別：<%= user.gender %></p>
@@ -9,9 +9,11 @@
     </p>
     <p class="user-prefecture">居住エリア：<%= user.prefecture.name %></p>
   <% end %>
-  <% if current_user.like_receivers.exists?(id:user.id) %>
-    <button class="liked-button" value=<%= user.id %>>いいね済み</button>
-  <% else %>
-    <button class="like-button" value=<%= user.id %>>いいね</button>
-  <% end %>
+  <div id=<%="user-like-button-#{user.id}"%>>
+    <% if current_user.like_receivers.exists?(id:user.id) %>
+      <button class="like-cancel-button" value=<%= user.id %>>いいね済み</button>
+    <% else %>
+      <button class="send-like-button" value=<%= user.id %>>いいね</button>
+    <% end %>
+  </div>
 </div>

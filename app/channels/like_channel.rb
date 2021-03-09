@@ -10,4 +10,5 @@ class LikeChannel < ApplicationCable::Channel
   def send_like(like_data)
     Like.create!(receiver_id: like_data['receiver_id'], sender_id: like_data['sender_id'])
   end
+
 end

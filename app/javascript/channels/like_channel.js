@@ -15,30 +15,23 @@ const appLike = consumer.subscriptions.create("LikeChannel", {
 
   send_like: function(like_data) {
     return this.perform('send_like', like_data)
+  },
+  delete_like: function(like_data) {
+    return this.perform('delete_like', like_data)
   }
 });
 
 function replaceHTML(like_receiver){
-  document.getElementById(`user-list-item-${like_receiver.id}`).innerHTML = buildHTML(like_receiver)
+  document.getElementById(`user-like-button-${like_receiver.id}`).innerHTML = buildHTML(like_receiver)
 };
 
 // jobでActionControllerのrendererメソッドを使ってViewを描画しようとしたが、Deviseの認証に引っかかるのでJS側で生成
 function buildHTML(like_receiver) {
-  return `<a href="/users/${like_receiver.id}">
-      <p class="user-name">名前：${like_receiver.name? like_receiver.name : "" }</p>
-      <p class="user-gender">性別：${like_receiver.gender? like_receiver.gender : "" }</p>
-      <p class="user-age">年齢：${like_receiver.birthday? like_receiver.birthday : "" }</p>
-      <p class="user-cotegories">趣味：${like_receiver.categories ? like_receiver.categories : "" }</p>
-      <p class="user-prefecture">居住エリア：${like_receiver.prefecture ? like_receiver.prefecture.name : "" }</p>
-  </a>
-  <div class="button-wrapper">
-   <button class="liked-button" value="${like_receiver.id}">いいね済み</button>
-  </div>
-`
+  return `<button class="like-cancel-button" value="${like_receiver.id}">いいね済み</button>`
 }
 
 onload = function() {
-  $(".like-button").on("click", function(e){
+  $(".send-like-button").on("click", function(e){
     const receiver_id = $(this).val()
     const sender_id   = $(".like-sender-id").val()
     appLike.send_like({
