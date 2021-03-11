@@ -15,9 +15,6 @@ const appLike = consumer.subscriptions.create("LikeChannel", {
 
   send_like: function(like_data) {
     return this.perform('send_like', like_data)
-  },
-  delete_like: function(like_data) {
-    return this.perform('delete_like', like_data)
   }
 });
 
