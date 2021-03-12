@@ -18,12 +18,12 @@ const appLikeCancel = consumer.subscriptions.create("LikeCancelChannel", {
   }
 });
 
-
-onload = function() {
+// https://qiita.com/sr2460/items/faee3d6459c236ff3280
+document.addEventListener('DOMContentLoaded', function() {
   $(".like-cancel-button").on("click", function(e){
+
     const receiver_id = $(this).val()
     const sender_id   = $(".like-sender-id").val()
-
     appLikeCancel.delete_like({
       receiver_id: receiver_id,
       sender_id: sender_id
@@ -31,4 +31,4 @@ onload = function() {
 
     e.preventDefault();
   });
-}
+},false);

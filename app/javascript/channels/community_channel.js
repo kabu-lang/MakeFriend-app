@@ -14,7 +14,8 @@ const appCommunity = consumer.subscriptions.create("CommunityChannel", {
   }
 });
 
-onload = function() {
+
+document.addEventListener('DOMContentLoaded', function() {
   $(".community-message-send-button").on("click", function(e){
     const user_id = $(".current-user-id-on-community-message").val()
     const community_id = $(".community-id").val()
@@ -28,4 +29,4 @@ onload = function() {
     e.preventDefault();
   });
 
-}
+},false);

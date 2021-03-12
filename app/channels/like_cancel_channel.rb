@@ -8,6 +8,7 @@ class LikeCancelChannel < ApplicationCable::Channel
   end
 
   def delete_like(like_data)
+    binding.pry
     like = Like.find_by(receiver_id: like_data['receiver_id'], sender_id: like_data['sender_id'])
     like.destroy!
   end

@@ -27,7 +27,7 @@ function buildHTML(like_receiver) {
   return `<button class="like-cancel-button" value="${like_receiver.id}">いいね済み</button>`
 }
 
-onload = function() {
+document.addEventListener('DOMContentLoaded', function() {
   $(".send-like-button").on("click", function(e){
     const receiver_id = $(this).val()
     const sender_id   = $(".like-sender-id").val()
@@ -39,4 +39,4 @@ onload = function() {
     e.preventDefault();
   });
 
-}
+},false);
