@@ -9,7 +9,8 @@ const appLikeCancel = consumer.subscriptions.create("LikeCancelChannel", {
     // Called when the subscription has been terminated by the server
   },
 
-  received(data) {
+  received(like_data) {
+    replaceHTML(like_data["receiver_id"])
     // Called when there's incoming data on the websocket for this channel
   },
 
@@ -17,6 +18,18 @@ const appLikeCancel = consumer.subscriptions.create("LikeCancelChannel", {
     return this.perform('delete_like', like_data);
   }
 });
+
+function replaceHTML(receiver_id){
+
+  document.getElementById(`user-like-button-${receiver_id}`).innerHTML = buildHTML(receiver_id)
+};
+
+function buildHTML(receiver_id) {
+
+  return `<button class="send-like-button" value="${receiver_id}">いいね</button>`
+}
+
+
 
 // https://qiita.com/sr2460/items/faee3d6459c236ff3280
 document.addEventListener('DOMContentLoaded', function() {
