@@ -33,8 +33,7 @@ function buildHTML(receiver_id) {
 
 // https://qiita.com/sr2460/items/faee3d6459c236ff3280
 document.addEventListener('DOMContentLoaded', function() {
-  $(".like-cancel-button").on("click", function(e){
-
+  $(document).on("click",".like-cancel-button", function(e){
     const receiver_id = $(this).val()
     const sender_id   = $(".like-sender-id").val()
     appLikeCancel.delete_like({

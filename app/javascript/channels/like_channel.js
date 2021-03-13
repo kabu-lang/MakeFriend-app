@@ -28,7 +28,7 @@ function buildHTML(like_receiver) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  $(".send-like-button").on("click", function(e){
+  $(document).on("click",".send-like-button", function(e){
     const receiver_id = $(this).val()
     const sender_id   = $(".like-sender-id").val()
     appLike.send_like({
