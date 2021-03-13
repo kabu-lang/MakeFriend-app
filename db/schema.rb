@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_02_28_124551) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "author"
-    t.integer "status"
+    t.integer "status", default: 0
     t.index ["category_id"], name: "index_communities_on_category_id"
   end
 
