@@ -26,10 +26,9 @@ class CommunitiesController < ApplicationController
       params[:community]["date(4i)"].to_i,
       params[:community]["date(5i)"].to_i
     )
-
     if @community.save
       @community.users << current_user
-      redirect_to @community
+      redirect_to community_path(@community.id)
     else
       render 'new'
     end
@@ -51,7 +50,7 @@ class CommunitiesController < ApplicationController
         params[:community]["date(4i)"].to_i,
         params[:community]["date(5i)"].to_i
       )
-      redirect_to @community
+      render @community
     else
       render 'edit'
     end
