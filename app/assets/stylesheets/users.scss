@@ -12,6 +12,48 @@
   //タテヨコ比を変えないままトリミング
 }
 
+h1 {
+  text-align: center;
+}
+.user-search {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .users-list-content {
-  
+  margin-bottom: 100px;
+  padding: 2.5% 0;
+  display: inline-block;
+	min-width: 100%;
+  display: flex;
+	flex-wrap: wrap;
+
+
+  .user-card {
+    // display: flex;
+    margin: 20px;
+    width: 12%;
+    height: 260px;
+    margin-bottom: 100px;
+    text-align: center;
+    padding: 30px;
+    background-color:white;
+  }
+
+  .send-like-button{
+    background-color: white;
+
+  }
+
+  .like-cancel-button{
+    background-color: #FF367F;
+    color: white;
+  }
+  p{
+    line-height: 1.5;
+    margin: 0;
+  }
+  p:first-child{
+    font-size: 1.4em;
+  }
 }

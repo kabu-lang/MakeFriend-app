@@ -1,11 +1,11 @@
 <div class= "users-page">
   <div>
     <% provide(:title, 'All users') %>
-    <h1>All users</h1>
+    <h1>おすすめユーザー</h1>
   </div>
 
   <div>
-    <%= form_tag(users_path,:method => 'get') do %>
+    <%= form_tag(users_path, method: 'get', class: "user-search" ) do %>
       <%= collection_select :category_id, :id, Category.all, :id, :category_name, prompt:"---" %>
       <%= submit_tag 'カテゴリーから探す',name: :send_category  %><br>
       <%= collection_select :prefecture_id, :id, Prefecture.all, :id, :name, prompt:"---" %>
