@@ -4,15 +4,11 @@
 
 
 <p>名前 : <%= @user.name %></p>
-<p>性別 : <% if @user.gender == 0 %>
-          男性
-         <% elsif @user.gender == 1 %>
-          女性
-         <% end %>
-</p>
+<p>性別 :<%= @user.gender_i18n %></p>
 
 
 <p>生年月日 : <%= @user.birthday %></p>
+<p>年齢： <%= @user.calculate_age %>歳</p>
 趣味 : <% @user.categories.each do |category| %>
        <%= category.category_name %>
       <% end %>
