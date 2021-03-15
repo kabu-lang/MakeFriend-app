@@ -50,7 +50,7 @@ class CommunitiesController < ApplicationController
         params[:community]["date(4i)"].to_i,
         params[:community]["date(5i)"].to_i
       )
-      render @community
+      redirect_to community_path(@community.id)
     else
       render 'edit'
     end
