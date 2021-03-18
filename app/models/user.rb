@@ -21,8 +21,8 @@ class User < ApplicationRecord
   has_many :like_senders, through: :received_likes, source: :sender
 
   accepts_nested_attributes_for :category_users, allow_destroy: true
-  
-  has_one_attached :image
+
+  # has_one_attached :image
   has_many :community_messages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
