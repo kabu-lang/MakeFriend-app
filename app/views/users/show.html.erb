@@ -19,8 +19,8 @@
 <p>地域 : <%= @user.prefecture.present? ? @user.prefecture.name : "" %></p>
 <p>一言 : <%= @user.remarks %></p>
 
-<% if @user.image.attached? %>
-  <%= image_tag @user.image %>
+<% if @user.image_name.present? %>
+  <%= image_tag @user.image_name.url %>
 <% end %>
 
 <% if current_user == @user %>
