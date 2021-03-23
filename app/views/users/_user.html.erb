@@ -1,9 +1,15 @@
 <div>
   <%= link_to user_path(user) do %>
     <p class="user-name">名前：<%= user.name %></p>
-    <p class="user-gender">性別：<%= user.gender %></p>
-    <p class="user-age">年齢：<%= user.birthday %></p>
-    
+
+    <p class="user-gender">性別：<%= user.gender_i18n %></p>
+    <p class="user-age">年齢：<%= user.calculate_age %>歳</p>
+    <p class="user-cotegories">趣味：<% user.categories.each do |category| %>
+      <%= category.category_name %>
+    <% end %>
+    </p>
+    <p class="user-prefecture">居住エリア：<%= user.prefecture.name %></p>
+
   <% end %>
   <div id=<%="user-like-button-#{user.id}"%>>
     <% if current_user.like_receivers.exists?(id:user.id) %>
