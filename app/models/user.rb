@@ -1,3 +1,4 @@
+require "date"
 class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
@@ -21,8 +22,9 @@ class User < ApplicationRecord
   has_many :like_senders, through: :received_likes, source: :sender
 
   accepts_nested_attributes_for :category_users, allow_destroy: true
-  
-  has_one_attached :image
+
+  # has_one_attached :image
+
   has_many :community_messages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -39,7 +41,7 @@ class User < ApplicationRecord
   scope :except_current_user, -> (current_user_id) {where.not(id:current_user_id)}
 
 
-  # enum gender: { men: 0, women: 1 }
+  enum gender: { men: 0, women: 1 }
 
    def update_without_current_password(params, *options)
      params.delete(:current_password)
@@ -51,6 +53,12 @@ class User < ApplicationRecord
      result = update_attributes(params, *options)
      clean_up_passwords
      result
+   end
+
+   def calculate_age
+     bd = self.birthday.strftime("%Y%m%d").to_i
+     dt = Date.today.strftime("%Y%m%d").to_i
+     ( dt - bd )/10000
    end
 
 private
