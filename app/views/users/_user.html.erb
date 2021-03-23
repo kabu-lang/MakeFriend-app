@@ -1,8 +1,8 @@
 <div>
   <%= link_to user_path(user) do %>
     <p class="user-name">名前：<%= user.name %></p>
-    <p class="user-gender">性別：<%= user.gender %></p>
-    <p class="user-age">年齢：<%= user.birthday %></p>
+    <p class="user-gender">性別：<%= user.gender_i18n %></p>
+    <p class="user-age">年齢：<%= user.calculate_age %>歳</p>
     <p class="user-cotegories">趣味：<% user.categories.each do |category| %>
       <%= category.category_name %>
     <% end %>

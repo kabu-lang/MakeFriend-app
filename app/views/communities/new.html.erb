@@ -1,1 +1,10 @@
-<%= render 'form', locals: { community: @comunnity } %>
+<% if @community.errors.any? %>
+  <div class="alert">
+    <ul>
+      <% @community.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= render 'form', locals: { community: @community } %>
