@@ -23,7 +23,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :category_users, allow_destroy: true
 
-  has_one_attached :image
+  # has_one_attached :image
+
   has_many :community_messages
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 

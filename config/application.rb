@@ -1,6 +1,17 @@
 require_relative 'boot'
+# activestorageを使わずにcarrierwaveを使うので以下の記事を参考に設定を変更
+# https://tech.dely.jp/entry/2019/12/22/145733#CarrierWave%E3%81%B8%E4%B9%97%E3%82%8A%E6%8F%9B%E3%81%88%E3%82%8B%E6%89%8B%E9%A0%86
 
-require 'rails/all'
+require "rails"
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "action_controller/railtie"
+require "action_mailer/railtie"
+require "action_view/railtie"
+require "sprockets/railtie"
+require "rails/test_unit/railtie"
+require "action_cable/engine"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
